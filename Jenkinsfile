@@ -39,8 +39,12 @@ pipeline {
             steps {
                   echo "building the application normally"
                   sh "mvn -v"
-                  echo "building application from groovy script"
+            }
+            setps {
+                script {
+                 echo "building application from groovy script"
                   gv.preChecks()
+                }
             }
           
         }
