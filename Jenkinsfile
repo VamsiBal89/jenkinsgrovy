@@ -30,6 +30,14 @@ pipeline {
                 }
             }
         }
+        stage("using-script-pipeline"){
+                steps {
+                script {
+                 echo "building application from groovy script"
+                  gv.preChecks()
+                }
+            }
+        }
         stage("build") {
              when {
                 expression {
@@ -39,12 +47,6 @@ pipeline {
             steps {
                   echo "building the application normally"
                   sh "mvn -v"
-            }
-            steps {
-                script {
-                 echo "building application from groovy script"
-                  gv.preChecks()
-                }
             }
           
         }
@@ -69,4 +71,3 @@ pipeline {
         }
     }
 }
-
