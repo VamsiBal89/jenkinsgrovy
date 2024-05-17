@@ -27,17 +27,12 @@ pipeline {
                 // Here we load groovy script into pipeline by using script block & we define gv as variable at top
                 script {
                     gv = load "script.groovy"
+                     echo "building application from groovy script"
+                    gv.preChecks()
                 }
             }
         }
-        stage("using-script-pipeline"){
-                steps {
-                script {
-                 echo "building application from groovy script"
-                  gv.preChecks()
-                }
-            }
-        }
+        
         stage("build") {
              when {
                 expression {
