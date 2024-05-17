@@ -52,6 +52,13 @@ pipeline {
             }
         }
         stage('deploying') {
+            input {
+                message "Selecting environment to deploy, choose one!"
+                ok "done"
+                parameters {
+                    choice(name: "ENV", choices: ["dev", "uat", "prod"], description: "choose 1 option")
+                }
+            }
             steps {
             echo "deploying the application!"
             // echo "credentials to deploy is ${server_credentials}"
@@ -61,6 +68,7 @@ pipeline {
             ]) {
                 echo "passing credentials to server ${USR} ${PWD}"
                 echo "deployed version is ${params.VERSION}"
+                echo "Now applicationdeployed to ${ENV}"
                 }
             }
         }
